@@ -1,6 +1,7 @@
 package goonjalali_test
 
 import (
+	"fmt"
 	"testing"
 	"time"
 
@@ -11,7 +12,7 @@ func TestNowDateIsCurrect(t *testing.T) {
 	officialDateTime := goonjalali.GetOfficialNow()
 	now := time.Now()
 	if now.Day() != officialDateTime.Day() {
-		t.Errorf("dates didn't equal %v %v", now.Format("2006-1-2"), officialDateTime.Format("2006-1-2"))
+		t.Errorf("date didn't equal %v %v", now.Format("2006-1-2"), officialDateTime.Format("2006-1-2"))
 	}
 }
 
@@ -34,8 +35,22 @@ func TestConvertYearInFutureIsCorrect(t *testing.T) {
 	}
 }
 
+func TestGetJalaliMonthName(t *testing.T) {
+	monthNumber, monthName, _ := goonjalali.GetJalaliMonthName(time.Date(2022, time.November, 28, 1, 1, 1, 1, time.UTC))
+
+	if monthNumber != 9 && monthName != "Azar" {
+		t.Errorf("month must equal Azar but equal %v", monthName)
+	}
+}
+
 // func TestCorrectConvertOfficailMonthToJalali(t *testing.T) {
 // 	// firstDateTime := time.Date(2022, 11, 28, 15, 20 , 20, 0, time.Now().Local().Location())
 // 	// firstConvert := goonjalali.GetJalaliMonthName(firstDateTime.Month().String(), firstDateTime.Day())
 
 // }
+
+func TestFullConvertDateToJalali(t *testing.T) {
+	exampleTime := time.Date(2022, time.November, 28, 1, 23, 45, 32, time.Local)
+
+	fmt.Println(goonjalali.Convert(exampleTime).GetPersianMonthName())
+}
