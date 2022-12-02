@@ -50,7 +50,18 @@ func TestGetJalaliMonthName(t *testing.T) {
 // }
 
 func TestFullConvertDateToJalali(t *testing.T) {
+	// exampleTime := time.Date(2022, time.November, 28, 1, 23, 45, 32, time.Local)
 	exampleTime := time.Date(2022, time.November, 28, 1, 23, 45, 32, time.Local)
 
-	fmt.Println(goonjalali.Convert(exampleTime).GetPersianMonthName())
+	// exampleTime := time.Now()
+
+	fmt.Printf(" %+v \n", goonjalali.Convert(exampleTime))
+
+	if goonjalali.Convert(exampleTime).Day != 7 {
+		t.Errorf("convert error")
+	}
+
+	// example2Time := time.Date(2022, time.January, 5, 1, 23, 45, 32, time.Local)
+	// jalaliDateTime := goonjalali.Convert(example2Time)
+	// fmt.Println(jalaliDateTime.Day)
 }
